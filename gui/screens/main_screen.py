@@ -10,25 +10,25 @@ class MainScreen(Screen):
         bl = BoxLayout(orientation="vertical", spacing=20, padding=40)
 
         bl.add_widget(Label(
-            text="Выберите раздел физики",
+            text="Выберите предмет",
             font_size=32,
             size_hint=(1, .2),
         ))
         
         bl.add_widget(Button(
-            text="Механика",
+            text="Maths",
         ))
 
         bl.add_widget(Button(
-            text="Оптика",
+            text="Physics",
         ))
 
         bl.add_widget(Button(
-            text="Электродинамика",
+            text="Chemistry",
         ))
 
         bl.add_widget(Button(
-            text="Термодинамика",
+            text="Custom",
         ))
 
         self.add_widget(bl)

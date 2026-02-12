@@ -1,5 +1,5 @@
-import core.thermodynamics.enum as enum
-import core.thermodynamics.calculations as calcs
+import core.physic.thermodynamics.enum as enum
+import core.physic.thermodynamics.calculations as calcs
 
 def formula_selection(input_text, enum_formula):
     option = int(input(input_text))

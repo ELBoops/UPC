@@ -1,5 +1,5 @@
-import core.mechanics.enum as enum
-import core.mechanics.calculations as calcs
+import core.physic.mechanics.enum as enum
+import core.physic.mechanics.calculations as calcs
 
 
 def formula_selection(input_text, enum_formula):

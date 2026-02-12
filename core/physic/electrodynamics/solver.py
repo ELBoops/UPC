@@ -2,8 +2,8 @@
 #ЭЛЕКТРОСТАТИКА И ЭЛЕКТРОДИНАМИКА#
 ##################################
 
-import core.electrodynamics.enum as enum
-import core.electrodynamics.calculations as calcs
+import core.physic.electrodynamics.enum as enum
+import core.physic.electrodynamics.calculations as calcs
 
 def formula_selection(input_text, enum_formula):
     option = int(input(input_text))

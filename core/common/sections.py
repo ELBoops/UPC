@@ -1,11 +1,11 @@
-import core.mechanics.solver as mech
-import core.mechanics.enum as mech_enum
-import core.thermodynamics.solver as therm
-import core.thermodynamics.enum as therm_enum
-import core.electrodynamics.solver as electro
-import core.electrodynamics.enum as electro_enum
-import core.optics.solver as optic
-import core.optics.enum as optic_enum
+import core.physic.mechanics.solver as mech
+import core.physic.mechanics.enum as mech_enum
+import core.physic.thermodynamics.solver as therm
+import core.physic.thermodynamics.enum as therm_enum
+import core.physic.electrodynamics.solver as electro
+import core.physic.electrodynamics.enum as electro_enum
+import core.physic.optics.solver as optic
+import core.physic.optics.enum as optic_enum
 
 ########
 #РАЗДЕЛЫ

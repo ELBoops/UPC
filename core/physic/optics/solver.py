@@ -1,5 +1,5 @@
-import core.optics.enum as enum
-import core.optics.calculations as calcs
+import core.physic.optics.enum as enum
+import core.physic.optics.calculations as calcs
 
 ########
 #ОПТИКА#
