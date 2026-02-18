@@ -3,6 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
+
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -22,25 +23,26 @@ class MainScreen(Screen):
         
         bl.add_widget(Button(
             text="Maths",
-            on_press= chage_screen("maths_screen")
+            on_press= lambda x: self.go_to("maths_screens"),
+            
         ))
 
         bl.add_widget(Button(
             text="Physics",
-            on_press= chage_screen("physics_screen")
+            on_press=lambda x: self.go_to("physics_screen")
         ))
 
         bl.add_widget(Button(
             text="Chemistry",
-            on_press= chage_screen("chemistry_screen")
+            on_press=lambda x: self.go_to("chemistry_screen")
         ))
 
         bl.add_widget(Button(
             text="Custom",
-            on_press= chage_screen("custom_screen")
+            on_press=lambda x: self.go_to("custom_screen")
         ))
 
         self.add_widget(bl)
 
-    def run_gui(self, screen_name):
+    def go_to(self, screen_name):
         self.manager.current = screen_name

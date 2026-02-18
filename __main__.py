@@ -8,10 +8,10 @@ choice = int(input("Выберите режим работы "
                 " Консольный режим - 2 ;"))
 match choice:
     case 1:
-        from gui.app import PhysicsApp
+        from gui.app import UPCApp
         
         if __name__ == "__main__":
-            PhysicsApp().run()
+            UPCApp().run()
         else:
             sys.exit()
     case 2:
