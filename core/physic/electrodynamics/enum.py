@@ -1,3 +1,6 @@
+import core.physic.electrodynamics.calculations as calc
+
+
 ##################################
 #ЭЛЕКТРОСТАТИКА И ЭЛЕКТРОДИНАМИКА#
 ##################################
@@ -39,9 +42,53 @@ TOTAL_RESISTANCE = 34
 
 FORMULAS = {
     "coulombs_law": {
+        "subjects_key": "электродинамика",
+        
         "title": "Закон Кулона",
-        "description": "Сила взаимодействия двух точечных зарядов",
         "formula_view": "F = k * (q1 * q2) / r^2",
+        
+        "cases": {
+            1: {
+                "name": "Найти силу",
+                "inputs": [
+                    ("q1", "Введите заряд №1"),
+                    ("q2", "Введите заряд №2"),
+                    ("r", "Введите расстояние между зарядами")
+                ],
+                "output": "Сила",
+                "function": "core.physic.electrodynamics.calculations.calc_coulombs_law"
+            },
+            2: {
+                "name": "Найти заряд №1",
+                "inputs": [
+                    ("F", "Введите силу"),
+                    ("q2", "Введите заряд №2"),
+                    ("r", "Введите расстояние между зарядами")
+                ],
+                "output": "Заряд №1",
+                "function": "core.physic.electrodynamics.calculations.calc_electric_charge_1_coulombs_law"
+            },
+            3: {
+                "name": "Найти заряд №2",
+                "inputs": [
+                    ("F", "Введите силу"),
+                    ("q1", "Введите заряд №1"),
+                    ("r", "Введите расстояние между зарядами")
+                ],
+                "output": "Заряд №2",
+                "function": "core.physic.electrodynamics.calculations.calc_electric_charge_2_coulombs_law"
+            },
+            4: {
+                "name": "Найти расстояние",
+                "inputs": [
+                    ("F", "Введите силу"),
+                    ("q1", "Введите заряд №1"),
+                    ("q2", "Введите заряд №2")
+                ],
+                "output": "Расстояние",
+                "function": "core.physic.electrodynamics.calculationscalc_distance_coulombs_law"
+            }
+        }
     },
     "el_field_intensity": {
         "title": "Напряженность электрического поля",

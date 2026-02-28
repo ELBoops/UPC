@@ -104,12 +104,12 @@ def section_selection(input_text, enum_section):
     option = int(input(input_text))
 
     match enum_section:
-        case sections.MECHANICS:
+        case 1:
              mech.formula_selection(mech_enum.mechanics[option], option)
-        case sections.MP_N_THERMODYNAMICS:
+        case 2:
             therm.formula_selection(therm_enum.mp_n_thermodynamics[option], option)
-        case sections.ELECTRODYNAMICS:
+        case 3:
             electro.formula_selection(electro_enum.electrostatic_n_electrodynamics[option], option)
-        case sections.OPTICS:
+        case 4:
             optic.formula_selection(optic_enum.optics[option], option)
             
