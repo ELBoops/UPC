@@ -56,7 +56,8 @@ FORMULAS = {
                     ("r", "Введите расстояние между зарядами")
                 ],
                 "output": "Сила",
-                "function": "core.physic.electrodynamics.calculations.calc_coulombs_law"
+                "function": "core.physic.electrodynamics.calculations.calc_coulombs_law",
+                "SI": "Ньютон (Н)"
             },
             2: {
                 "name": "Найти заряд №1",
@@ -66,7 +67,8 @@ FORMULAS = {
                     ("r", "Введите расстояние между зарядами")
                 ],
                 "output": "Заряд №1",
-                "function": "core.physic.electrodynamics.calculations.calc_electric_charge_1_coulombs_law"
+                "function": "core.physic.electrodynamics.calculations.calc_electric_charge_1_coulombs_law",
+                "SI": "Кулон (Кл)"
             },
             3: {
                 "name": "Найти заряд №2",
@@ -76,7 +78,8 @@ FORMULAS = {
                     ("r", "Введите расстояние между зарядами")
                 ],
                 "output": "Заряд №2",
-                "function": "core.physic.electrodynamics.calculations.calc_electric_charge_2_coulombs_law"
+                "function": "core.physic.electrodynamics.calculations.calc_electric_charge_2_coulombs_law",
+                "SI": "Кулон (Кл)"
             },
             4: {
                 "name": "Найти расстояние",
@@ -868,82 +871,529 @@ FORMULAS = {
         }},
     # Сила Ампера: F = I * L * B * sin(угла)
     "amperes_force": {
+        "subjects_key": "электродинамика",
         "title": "Сила Ампера",
         "description": "Сила, действующая на проводник с током в магнитном поле",
         "formula_view": "F = I * l * B * sin(α)",
+        "cases": {
+            1: {
+                "name": "Найти силу Ампера",
+                "inputs": [
+                    ("I", "Введите силу тока в проводнике"),
+                    ("l", "Введите длину проводника"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между проводником и вектором магнитной индукции")
+                ],
+                "output": "Сила Ампера",
+                "function": "core.physic.electrodynamics.calculations.calc_amperes_force"
+            },
+            2: {
+                "name": "Найти силу тока в проводнике",
+                "inputs": [
+                    ("F", "Введите силу Ампера"),
+                    ("l", "Введите длину проводника"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между проводником и вектором магнитной индукции")
+                ],
+                "output": "Сила тока в проводнике",
+                "function": "core.physic.electrodynamics.calculations.calc_current_amperes_force"
+            },
+            3: {
+                "name": "Вектор магнитной индукции",
+                "inputs": [
+                    ("F", "Введите силу Ампера"),
+                    ("I", "Введите силу тока в проводнике"),
+                    ("l", "Введите длину проводника"),
+                    ("α", "Введите угол между проводником и вектором магнитной индукции")
+                ],
+                "output": "Вектор магнитной индукции",
+                "function": "core.physic.electrodynamics.calculations.calc_magnetic_induction_amperes_force"
+            },
+            4: {
+                "name": "Найти длину проводника",
+                "inputs": [
+                    ("F", "Введите силу Ампера"),
+                    ("I", "Введите силу тока в проводнике"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между проводником и вектором магнитной индукции")
+                ],
+                "output": "Длина проводника",
+                "function": "core.physic.electrodynamics.calculations.calc_length_amperes_force"
+            }
+            
+        }
     },
     # Сила Лоренца (магнитная составляющая): F = q * v * B * sin(угла)
     "lorentz_force": {
+        "subjects_key": "электродинамика",
         "title": "Сила Лоренца",
         "description": "Сила, действующая на заряженную частицу в электромагнитном поле",
         "formula_view": "F = q * (E + v × B)",
-    },
+        "cases": {
+            1: {
+                "name": "Найти силу Лоренца",
+                "inputs": [
+                    ("q", "Введите величину заряда"),
+                    ("v", "Введите скорость частицы"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между скоростью частицы и вектором магнитной индукции")
+                ],
+                "output": "Сила Лоренца",
+                "function": "core.physic.electrodynamics.calculations.calc_lorentz_force"
+            },
+            2: {
+                "name": "Найти электрический заряд частицы",
+                "inputs": [
+                    ("F", "Введите силу Лоренца"),
+                    ("v", "Введите скорость частицы"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между скоростью частицы и вектором магнитной индукции")
+                ],
+                "output": "Величина заряда",
+                "function": "core.physic.electrodynamics.calculations.calc_charge_lorentz_force"
+            },
+            3: {
+                "name": "Найти скорость частицы",
+                "inputs": [
+                    ("F", "Введите силу Лоренца"),
+                    ("q", "Введите величину заряда"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между скоростью частицы и вектором магнитной индукции")
+                ],
+                "output": "Скорость частицы",
+                "function": "core.physic.electrodynamics.calculations.calc_velocity_lorentz_force"
+            },
+            4: {
+                "name": "Найти вектор магнитной индукции",
+                "inputs": [
+                    ("F", "Введите силу Лоренца"),
+                    ("q", "Введите величину заряда"),
+                    ("v", "Введите скорость частицы"),
+                    ("α", "Введите угол между скоростью частицы и вектором магнитной индукции")
+                ],
+                "output": "Вектор магнитной индукции",
+                "function": "core.physic.electrodynamics.calculations.calc_magnetic_induction_lorentz_force"
+            }
+            }},
     # Магнитный поток: Phi = B * S * sin(угла)
     "magnetic_flux": {
+        "subjects_key": "электродинамика",
         "title": "Магнитный поток",
         "description": "Величина, характеризующая количество магнитного поля, проходящего через поверхность",
         "formula_view": "Φ = B * S * sin(α)",
+        "cases": {
+            1: {
+                "name": "Найти магнитный поток",
+                "inputs": [
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("S", "Введите площадь поверхности"),
+                    ("α", "Введите угол между вектором магнитной индукции и нормалью к поверхности")
+                ],
+                "output": "Магнитный поток",
+                "function": "core.physic.electrodynamics.calculations.calc_magnetic_flux"
+            },
+            2: {
+                "name": "Найти вектор магнитной индукции",
+                "inputs": [
+                    ("Φ", "Введите магнитный поток"),
+                    ("S", "Введите площадь поверхности"),
+                    ("α", "Введите угол между вектором магнитной индукции и нормалью к поверхности")
+                ],
+                "output": "Вектор магнитной индукции",
+                "function": "core.physic.electrodynamics.calculations.calc_magnetic_induction_flux"
+            },
+            3: {
+                "name": "Найти площадь поверхности",
+                "inputs": [
+                    ("Φ", "Введите магнитный поток"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("α", "Введите угол между вектором магнитной индукции и нормалью к поверхности")
+                ],
+                "output": "Площадь поверхности",
+                "function": "core.physic.electrodynamics.calculations.calc_area_magnetic_flux"
+            },
+            4: {
+                "name": "Найти угол между вектором магнитной индукции и нормалью к поверхности",
+                "inputs": [
+                    ("Φ", "Введите магнитный поток"),
+                    ("B", "Введите вектор магнитной индукции"),
+                    ("S", "Введите площадь поверхности")
+                ],
+                "output": "Угол между вектором магнитной индукции и нормалью к поверхности",
+                "function": "core.physic.electrodynamics.calculations.calc_sin_alpha_magnetic_flux"
+            }
+        }
     },
     # Электромагнитная индукция (закон Фарадея): emf = - (delta_phi / delta_t)
     "electromagnetic_induction_law": {
+        "subjects_key": "электродинамика",
         "title": "Закон электромагнитной индукции",
         "description": "Зависимость электродвижущей силы индукции от изменения магнитного потока",
         "formula_view": "ε = -ΔΦ / Δt",
-    },
+        "cases": {
+            1: {
+                "name": "Найти электродвижущую силу (ЭДС) индукции",
+                "inputs": [
+                    ("ΔΦ", "Введите изменение магнитного потока"),
+                    ("Δt", "Введите время, за которое произошло изменение потока")
+                ],
+                "output": "Электродвижущая сила (ЭДС) индукции",
+                "function": "core.physic.electrodynamics.calculations.calc_emf_induction_law"
+            },
+            2: {
+                "name": "Найти изменение магнитного потока",
+                "inputs": [
+                    ("ε", "Введите электродвижущую силу (ЭДС) индукции"),
+                    ("Δt", "Введите время, за которое произошло изменение потока")
+                ],
+                "output": "Изменение магнитного потока",
+                "function": "core.physic.electrodynamics.calculations.calc_delta_phi_induction_law"
+            },
+            3: {
+                "name": "Найти время изменения магнитного потока",
+                "inputs": [
+                    ("ε", "Введите электродвижущую силу (ЭДС) индукции"),
+                    ("ΔΦ", "Введите изменение магнитного потока")
+                ],
+                "output": "Время изменения магнитного потока",
+                "function": "core.physic.electrodynamics.calculations.calc_delta_t_induction_law"
+            }
+    }},
     # ЭДС в движущемся проводнике: emf = B * l * v * sin(угла)
     "emf_moving_conductor": {
         "title": "ЭДС индукции в движущемся проводнике",
         "description": "ЭДС, возникающая в проводнике, движущемся в магнитном поле",
         "formula_view": "ε = B * l * v * sin(α)",
-    },
+            "cases": {
+                1: {
+                    "name": "Найти ЭДС индукции в движущемся проводнике",
+                    "inputs": [
+                        ("B", "Введите вектор магнитной индукции"),
+                        ("l", "Введите длину проводника"),
+                        ("v", "Введите скорость движения проводника"),
+                        ("α", "Введите угол между направлением движения проводника и вектором магнитной индукции")
+                    ],
+                    "output": "ЭДС индукции в движущемся проводнике",
+                    "function": "core.physic.electrodynamics.calculations.calc_emf_moving_conductor"
+                },
+                2: {
+                    "name": "Найти вектор магнитной индукции",
+                    "inputs": [
+                        ("ε", "Введите ЭДС индукции в движущемся проводнике"),
+                        ("l", "Введите длину проводника"),
+                        ("v", "Введите скорость движения проводника"),
+                        ("α", "Введите угол между направлением движения проводника и вектором магнитной индукции")
+                    ],
+                    "output": "Вектор магнитной индукции",
+                    "function": "core.physic.electrodynamics.calculations.calc_magnetic_induction_moving_conductor"
+                },
+                3: {
+                    "name": "Найти длину проводника",
+                    "inputs": [
+                        ("ε", "Введите ЭДС индукции в движущемся проводнике"),
+                        ("B", "Введите вектор магнитной индукции"),
+                        ("v", "Введите скорость движения проводника"),
+                        ("α", "Введите угол между направлением движения проводника и вектором магнитной индукции")
+                    ],
+                    "output": "Длина проводника",
+                    "function": "core.physic.electrodynamics.calculations.calc_length_moving_conductor"
+                },
+                4: {
+                    "name": "Найти скорость движения проводника",
+                    "inputs": [
+                        ("ε", "Введите ЭДС индукции в движущемся проводнике"),
+                        ("B", "Введите вектор магнитной индукции"),
+                        ("l", "Введите длину проводника"),
+                        ("α", "Введите угол между направлением движения проводника и вектором магнитной индукции")
+                    ],
+                    "output": "Скорость движения проводника",
+                    "function": "core.physic.electrodynamics.calculations.calc_velocity_moving_conductor"
+                }
+                }},
     # Самоиндукция: emf = - L * (delta_I / delta_t)
     "emf_self_induction": {
+        "subjects_key": "электродинамика",
         "title": "ЭДС самоиндукции",
         "description": "ЭДС, возникающая в катушке при изменении силы тока в ней",
         "formula_view": "ε = -L * (ΔI / Δt)",
-    },
+        "cases": {
+            1: {
+                "name": "Найти ЭДС самоиндукции",
+                "inputs": [
+                    ("L", "Введите индуктивность катушки"),
+                    ("ΔI", "Введите изменение силы тока"),
+                    ("Δt", "Введите время, за которое произошло изменение силы тока")
+                ],
+                "output": "ЭДС самоиндукции",
+                "function": "core.physic.electrodynamics.calculations.calc_emf_self_induction"
+            },
+            2: {
+                "name": "Найти индуктивность катушки (Коэффициент самоиндукции)",
+                "inputs": [
+                    ("ε", "Введите ЭДС самоиндукции"),
+                    ("ΔI", "Введите изменение силы тока"),
+                    ("Δt", "Введите время, за которое произошло изменение силы тока")
+                ],
+                "output": "Индуктивность катушки (Коэффициент самоиндукции)",
+                "function": "core.physic.electrodynamics.calculations.calc_inductance_self_induction"
+            },
+            3: {
+                "name": "Найти изменение силы тока",
+                "inputs": [
+                    ("ε", "Введите ЭДС самоиндукции"),
+                    ("L", "Введите индуктивность катушки (Коэффициент самоиндукции)"),
+                    ("Δt", "Введите время, за которое произошло изменение силы тока")
+                ],
+                "output": "Изменение силы тока",
+                "function": "core.physic.electrodynamics.calculations.calc_delta_current_self_induction"
+            },
+            4: {
+                "name": "Найти время изменения силы тока",
+                "inputs": [
+                    ("ε", "Введите ЭДС самоиндукции"),
+                    ("L", "Введите индуктивность катушки (Коэффициент самоиндукции)"),
+                    ("ΔI", "Введите изменение силы тока")
+                ],
+                "output": "Время изменения силы тока",
+                "function": "core.physic.electrodynamics.calculations.calc_time_self_induction"
+    }
+            }},
     # Энергия магнитного поля катушки: W = 0.5 * L * I^2
     "coil_magnetic_field_energy": {
+        "subjects_key": "электродинамика",
         "title": "Энергия магнитного поля катушки",
         "description": "Энергия, запасаемая в магнитном поле катушки с током",
         "formula_view": "W = (1/2) * L * I^2",
-    },
+        "cases": {
+            1: {
+                "name": "Найти энергию магнитного поля катушки",
+                "inputs": [
+                    ("L", "Введите индуктивность катушки"),
+                    ("I", "Введите силу тока в катушке")
+                ],
+                "output": "Энергия магнитного поля катушки",
+                "function": "core.physic.electrodynamics.calculations.calc_coil_magnetic_field_energy"
+            },
+            2: {
+                "name": "Найти индуктивность катушки",
+                "inputs": [
+                    ("W", "Введите энергию магнитного поля катушки"),
+                    ("I", "Введите силу тока в катушке")
+                ],
+                "output": "Индуктивность катушки",
+                "function": "core.physic.electrodynamics.calculations.calc_inductance_coil_energy"
+            },
+            3: {
+                "name": "Найти силу тока в катушке",
+                "inputs": [
+                    ("W", "Введите энергию магнитного поля катушки"),
+                    ("L", "Введите индуктивность катушки")
+                ],
+                "output": "Сила тока в катушке",
+                "function": "core.physic.electrodynamics.calculations.calc_current_coil_energy"
+            }
+    }},
     # Период колебательного контура: T = 2 * pi * sqrt(L * C)
     "oscillating_circuit_period": {
+        "subjects_key": "электродинамика",
         "title": "Период колебаний в колебательном контуре",
         "description": "Период колебаний в колебательном контуре, состоящем из катушки и конденсатора",
         "formula_view": "T = 2 * π * √(L * C)",
-    },
+        "cases": {
+            1: {
+                "name": "Найти период колебаний в колебательном контуре",
+                "inputs": [
+                    ("L", "Введите индуктивность катушки"),
+                    ("C", "Введите ёмкость конденсатора")
+                ],
+                "output": "Период колебаний в колебательном контуре",
+                "function": "core.physic.electrodynamics.calculations.calc_oscillating_circuit_period"
+            },
+            2: {
+                "name": "Найти индуктивность катушки",
+                "inputs": [
+                    ("T", "Введите период колебаний в колебательном контуре"),
+                    ("C", "Введите ёмкость конденсатора")
+                ],
+                "output": "Индуктивность катушки",
+                "function": "core.physic.electrodynamics.calculations.calc_inductance_oscillating_circuit"
+            },
+            3: {
+                "name": "Найти ёмкость конденсатора",
+                "inputs": [
+                    ("T", "Введите период колебаний в колебательном контуре"),
+                    ("L", "Введите индуктивность катушки")
+                ],
+                "output": "Ёмкость конденсатора",
+                "function": "core.physic.electrodynamics.calculations.calc_capacitance_oscillating_circuit"
+            }
+    }},
     # Индуктивное сопротивление: X_L = 2 * pi * f * L
     "inductive_resistance": {
+        "subjects_key": "электродинамика",
         "title": "Индуктивное сопротивление",
         "description": "Сопротивление, создаваемое катушкой при прохождении переменного тока",
         "formula_view": "X_L = 2 * π * f * L",
-    },
+        "cases": {
+            1: {
+                "name": "Найти индуктивное сопротивление",
+                "inputs": [
+                    ("f", "Введите частоту переменного тока"),
+                    ("L", "Введите индуктивность катушки")
+                ],
+                "output": "Индуктивное сопротивление",
+                "function": "core.physic.electrodynamics.calculations.calc_inductive_resistance"
+            },
+            2: {
+                "name": "Найти частоту переменного тока",
+                "inputs": [
+                    ("X_L", "Введите индуктивное сопротивление"),
+                    ("L", "Введите индуктивность катушки")
+                ],
+                "output": "Частота переменного тока",
+                "function": "core.physic.electrodynamics.calculations.calc_frequency_inductive_resistance"
+            },
+            3: {
+                "name": "Найти индуктивность катушки",
+                "inputs": [
+                    ("X_L", "Введите индуктивное сопротивление"),
+                    ("f", "Введите частоту переменного тока")
+                ],
+                "output": "Индуктивность катушки",
+                "function": "core.physic.electrodynamics.calculations.calc_inductance_from_resistance"
+    }
+        }},
     # Емкостное сопротивление: X_C = 1 / (2 * pi * f * C)
     "capacitive_resistance": {
+        "subjects_key": "электродинамика",
         "title": "Емкостное сопротивление",
         "description": "Сопротивление, создаваемое конденсатором при прохождении переменного тока",
         "formula_view": "X_C = 1 / (2 * π * f * C)",
-    },
+        "cases": {
+            1: {
+                "name": "Найти емкостное сопротивление",
+                "inputs": [
+                    ("f", "Введите частоту переменного тока"),
+                    ("C", "Введите электрическую ёмкость конденсатора")
+                ],
+                "output": "Емкостное сопротивление",
+                "function": "core.physic.electrodynamics.calculations.calc_capacitive_resistance"
+            },
+            2: {
+                "name": "Найти электрическую ёмкость конденсатора",
+                "inputs": [
+                    ("X_C", "Введите емкостное сопротивление"),
+                    ("f", "Введите частоту переменного тока")
+                ],
+                "output": "Электрическая ёмкость конденсатора",
+                "function": "core.physic.electrodynamics.calculations.calc_capacitance_from_capacitive_resistance"
+            },
+            3: {
+                "name": "Найти угловую частоту переменного тока",
+                "inputs": [
+                    ("X_C", "Введите емкостное сопротивление"),
+                    ("C", "Введите электрическую ёмкость конденсатора")
+                ],
+                "output": "Угловая частота переменного тока",
+                "function": "core.physic.electrodynamics.calculations.calc_angular_frequency_from_capacitive_resistance"    
+            }   
+        }},
     # Эффективные (действующие) значения тока: I_rms = I_max / sqrt(2)
     "actual_current_value": {
+        "subjects_key": "электродинамика",
         "title": "Действующее значение силы тока",
         "description": "Действующее значение силы тока в переменном токе",
         "formula_view": "I = I_max / √2",
-    },
+        "cases": {
+            1: {
+                "name": "Найти действующее значение силы тока",
+                "inputs": [
+                    ("I_max", "Введите максимальное значение силы тока")
+                ],
+                "output": "Действующее значение силы тока",
+                "function": "core.physic.electrodynamics.calculations.calc_actual_current_value"
+            },
+            2: {
+                "name": "Найти максимальное значение силы тока",
+                "inputs": [
+                    ("I", "Введите действующее значение силы тока")
+                ],
+                "output": "Максимальное значение силы тока",
+                "function": "core.physic.electrodynamics.calculations.calc_max_current_from_actual"
+    }
+            }},
     # Эффективные (действующие) значения напряжения: V_rms = V_max / sqrt(2)
     "actual_voltage_value": {
+        "subjects_key": "электродинамика",
         "title": "Действующее значение напряжения",
         "description": "Действующее значение напряжения в переменном токе",
         "formula_view": "V = V_max / √2",
-    },
+        "cases": {
+            1: {
+                "name": "Найти действующее значение напряжения",
+                "inputs": [
+                    ("V_max", "Введите максимальное значение напряжения")
+                ],
+                "output": "Действующее значение напряжения",
+                "function": "core.physic.electrodynamics.calculations.calc_actual_voltage_value"
+            },
+            2: {
+                "name": "Найти максимальное значение напряжения",
+                "inputs": [
+                    ("V", "Введите действующее значение напряжения")
+                ],
+                "output": "Максимальное значение напряжения",
+                "function": "core.physic.electrodynamics.calculations.calc_max_voltage_from_actual"
+    }
+            }},
     # Полное сопротивление (последовательные R, Xl, Xc): Z = sqrt(R^2 + (Xl - Xc)^2)
     "total_resistance": {
+        "subjects_key": "электродинамика",
         "title": "Полное сопротивление",
         "description": "Полное сопротивление в цепи переменного тока, учитывающее активное, индуктивное и емкостное сопротивления",
         "formula_view": "Z = √(R^2 + (X_L - X_C)^2)",
-    },   
+        "cases": {
+            1: {
+                "name": "Найти полное сопротивление",
+                "inputs": [
+                    ("R", "Введите активное сопротивление"),
+                    ("X_L", "Введите индуктивное сопротивление"),
+                    ("X_C", "Введите емкостное сопротивление")
+                ],
+                "output": "Полное сопротивление",
+                "function": "core.physic.electrodynamics.calculations.calc_total_resistance"
+            },
+            2: {
+                "name": "Найти активное сопротивление",
+                "inputs": [
+                    ("Z", "Введите полное сопротивление"),
+                    ("X_L", "Введите индуктивное сопротивление"),
+                    ("X_C", "Введите емкостное сопротивление")
+                ],
+                "output": "Активное сопротивление",
+                "function": "core.physic.electrodynamics.calculations.calc_capacitive_resistance_from_total"
+            },
+            3: {
+                "name": "Найти индуктивное сопротивление",
+                "inputs": [
+                    ("Z", "Введите полное сопротивление"),
+                    ("R", "Введите активное сопротивление"),
+                    ("X_C", "Введите емкостное сопротивление")
+                ],
+                "output": "Индуктивное сопротивление",
+                "function": "core.physic.electrodynamics.calculations.calc_inductive_resistance_from_total"
+            },
+            4: {
+                "name": "Найти емкостное сопротивление",
+                "inputs": [
+                    ("Z", "Введите полное сопротивление"),
+                    ("R", "Введите активное сопротивление"),
+                    ("X_L", "Введите индуктивное сопротивление")
+                ],
+                "output": "Емкостное сопротивление",
+                "function": "core.physic.electrodynamics.calculations.calc_capacitive_resistance_from_total"
+    }
+        }}   
 }
 
 electrostatic_n_electrodynamics = {

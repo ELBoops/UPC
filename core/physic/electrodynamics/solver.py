@@ -391,7 +391,7 @@ def formula_selection(input_text, enum_formula):
                 case 3:
                     force = float(input("Введите силу: "))
                     current = float(input("Введите силу тока: "))
-                    length = float(input("Введите вектор магнитной индукции: "))
+                    length = float(input("Введите длину проводника: "))
                     angle = float(input("Введите угол (в радианах): "))
                     print(f"Вектор магнитной индукции = {calcs.calc_magnetic_induction_amperes_force(force, current, length, angle)}")
                 case 4:
