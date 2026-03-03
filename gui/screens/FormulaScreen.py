@@ -30,6 +30,11 @@ class FormulaScreen(Screen):
             size_hint = (1, 0.2))
         )
         
+        # Описание
+        bl.add_widget(Label(
+            text=data.get("description", ""),
+            size_hint = (1, 0.1)
+            ))
         # Формула
         bl.add_widget(Label(
             text=data["formula_view"],
