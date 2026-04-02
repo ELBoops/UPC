@@ -1,11 +1,11 @@
-import core.physics.mechanics.solver as mech
-import core.physics.mechanics.enum as mech_enum
-import core.physics.thermodynamics.solver as therm
-import core.physics.thermodynamics.enum as therm_enum
-import core.physics.electrodynamics.solver as electro
-import core.physics.electrodynamics.enum as electro_enum
-import core.physics.optics.solver as optic
-import core.physics.optics.enum as optic_enum
+import core.physic.mechanics.solver as mech
+import core.physic.mechanics.enum as mech_enum
+import core.physic.thermodynamics.solver as therm
+import core.physic.thermodynamics.enum as therm_enum
+import core.physic.electrodynamics.solver as electro
+import core.physic.electrodynamics.enum as electro_enum
+import core.physic.optics.solver as optic
+import core.physic.optics.enum as optic_enum
 
 ########
 #РАЗДЕЛЫ
@@ -95,9 +95,8 @@ sections = {
                 "Показатель преломления - 2"
                 "Формула тонкой линзы - 3"
                 "Оптическая сила линзы - 4"
-                "MAX интерференции - 5"
-                "MIN интерференции - 6"
-                "Диф.решетка - 7 """,
+                "MAX/MIN интерференция - 5"
+                "Диф.решетка - 6 """,
 }
 
 def section_selection(input_text, enum_section):

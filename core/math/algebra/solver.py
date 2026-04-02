@@ -4,7 +4,7 @@ from sympy.core.expr import Expr
 
 import core.math.algebra.calculations as calcs
 import core.math.algebra.enum as enum
-
+from core.math.handbook import run_handbook_console
 #########
 # АЛГЕБРА
 #########
@@ -19,26 +19,16 @@ def identify_formula(expression: str) -> tuple[int | None, Expr]:
 
 
 def formula_selection(input_text, enum_formula):
-	option = int(input(input_text))
-
-	match enum_formula:
-		case enum.SQUARE_SUM | enum.SQUARE_DIFF | enum.DIFF_OF_SQUARES | enum.CUBE_SUM | enum.CUBE_DIFF | enum.SUM_OF_CUBES | enum.DIFF_OF_CUBES:
-			match option:
-				case 1:
-					steps, result = calcs.calc_solution_steps(enum_formula)
-					print("Пошаговое решение:")
-					for step in steps:
-						print(step)
-					print(f"Ответ = {result}")
-				case 2:
-					a_value = float(input("Введите a: "))
-					b_value = float(input("Введите b: "))
-					steps, result = calcs.calc_solution_steps(enum_formula, a_value, b_value)
-					print("Пошаговое решение:")
-					for step in steps:
-						print(step)
-					print(f"Ответ = {result}")
-				case _:
-					print("Неверный вариант.")
-		case _:
+	try:
+		option = int(input(input_text))
+		if enum_formula != enum.HANDBOOK_FORMULAS:
 			print("Неверная формула.")
+			return
+
+		match option:
+			case 1:
+				run_handbook_console()
+			case _:
+				print("Неверный вариант.")
+	except (ValueError, ZeroDivisionError) as error:
+		print(f"Ошибка ввода/вычисления: {error}")

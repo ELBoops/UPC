@@ -8,6 +8,28 @@ def _read_float(prompt: str) -> float:
     return float(value)
 
 
+def _format_unit_text(item: dict) -> str:
+    return str(item.get("unit_symbol") or "").strip()
+
+
+def _format_quantity_text(item: dict) -> str:
+    symbol = str(item.get("name") or "").strip()
+    unit = _format_unit_text(item)
+
+    if unit:
+        return f"{symbol} ({unit})"
+    return symbol
+
+
+def _find_variable_by_alias(variables: list[dict], alias: str) -> dict | None:
+    alias_normalized = alias.strip().lower()
+    for item in variables:
+        name = str(item.get("name") or "").strip().lower()
+        if alias_normalized == name:
+            return item
+    return None
+
+
 def run_console_physics() -> None:
     section = int(
         input(
@@ -23,38 +45,9 @@ def run_console_physics() -> None:
 
 
 def run_console_math() -> None:
-    import core.math.algebra.enum as algebra_enum
-    import core.math.algebra.solver as algebra_solver
+    from core.math.handbook import run_handbook_console
 
-    branch = int(
-        input(
-            "Выберите раздел математики "
-            "(Алгебра - 1;)"
-        )
-    )
-
-    if branch != 1:
-        print("Раздел математики пока недоступен")
-        return
-
-    formula = int(
-        input(
-            "Выберите формулу алгебры "
-            "((a + b)^2 - 1;"
-            " (a - b)^2 - 2;"
-            " (a + b)(a - b) - 3;"
-            " (a + b)^3 - 4;"
-            " (a - b)^3 - 5;"
-            " a^3 + b^3 - 6;"
-            " a^3 - b^3 - 7;)"
-        )
-    )
-
-    if formula not in algebra_enum.algebra:
-        print("Неизвестная формула")
-        return
-
-    algebra_solver.formula_selection(algebra_enum.algebra[formula], formula)
+    run_handbook_console()
 
 
 def run_console_custom() -> None:
@@ -64,7 +57,7 @@ def run_console_custom() -> None:
         export_custom_formulas,
         import_custom_formulas,
     )
-    from core.custom.solver import eval_expression, solve_equation, get_formula_symbols
+    from core.custom.solver import solve_formula_with_steps
 
     action = int(
         input(
@@ -85,6 +78,14 @@ def run_console_custom() -> None:
 
         for item in formulas:
             print(f"- {item.get('title', 'Пользовательская формула')}: {item.get('formula', '')}")
+            for variable in item.get("variables", []):
+                print(f"    • {_format_quantity_text(variable)}")
+            result = item.get("result")
+            if result:
+                result_name = str(result.get("display_name") or "Результат").strip()
+                result_unit = _format_unit_text(result)
+                suffix = f" ({result_unit})" if result_unit else ""
+                print(f"    • Результат: {result_name}{suffix}")
         return
 
     if action == 3:
@@ -105,61 +106,68 @@ def run_console_custom() -> None:
         selected_formula = formulas[selected_index]
         formula_text = selected_formula.get("formula", "").strip()
         variables = selected_formula.get("variables", [])
-        units_by_name = {
-            item.get("name", "").strip().lower(): item.get("unit_symbol", "").strip()
-            for item in variables
-            if item.get("name")
-        }
-        variable_names = get_formula_symbols(formula_text)
 
         if not formula_text:
             print("У выбранной формулы нет выражения")
             return
 
         if "=" in formula_text:
-            print(f"Доступные величины: {', '.join(variable_names)}")
-            target = input("Что найти (обозначение): ").strip()
-            if target.lower() not in {name.lower() for name in variable_names}:
+            print("Доступные величины:")
+            for variable in variables:
+                print(f"- {_format_quantity_text(variable)}")
+
+            target_input = input("Что найти (обозначение): ").strip()
+            target_variable = _find_variable_by_alias(variables, target_input)
+            if target_variable is None:
                 print("Неизвестная величина")
                 return
 
             known_values: dict[str, float] = {}
-            for variable_name in variable_names:
-                if variable_name.lower() == target.lower():
+            for variable in variables:
+                variable_name = str(variable.get("name") or "").strip()
+                if variable_name.lower() == str(target_variable.get("name") or "").strip().lower():
                     continue
-                unit = units_by_name.get(variable_name.lower())
-                suffix = f" ({unit})" if unit else ""
-                known_values[variable_name] = _read_float(f"Введите {variable_name}{suffix}: ")
+                known_values[variable_name] = _read_float(
+                    f"Введите {_format_quantity_text(variable)}: "
+                )
 
             try:
-                solutions = solve_equation(formula_text, target, known_values)
+                solution = solve_formula_with_steps(
+                    formula_text,
+                    known_values,
+                    target_variable=str(target_variable.get("name") or "").strip(),
+                    variables=variables,
+                )
             except (TypeError, ValueError) as error:
                 print(f"Ошибка вычисления: {error}")
                 return
 
-            if not solutions:
-                print("Не удалось получить численное решение")
-                return
-
-            if len(solutions) == 1:
-                print(f"{target} = {solutions[0]}")
-            else:
-                print(f"Возможные значения {target}: {', '.join(str(item) for item in solutions)}")
+            print("Пошаговое решение:")
+            for step in solution["steps"]:
+                print(step)
             return
 
         known_values: dict[str, float] = {}
-        for variable_name in variable_names:
-            unit = units_by_name.get(variable_name.lower())
-            suffix = f" ({unit})" if unit else ""
-            known_values[variable_name] = _read_float(f"Введите {variable_name}{suffix}: ")
+        for variable in variables:
+            variable_name = str(variable.get("name") or "").strip()
+            known_values[variable_name] = _read_float(
+                f"Введите {_format_quantity_text(variable)}: "
+            )
 
         try:
-            result = eval_expression(formula_text, known_values)
+            solution = solve_formula_with_steps(
+                formula_text,
+                known_values,
+                variables=variables,
+                result=selected_formula.get("result"),
+            )
         except (TypeError, ValueError) as error:
             print(f"Ошибка вычисления: {error}")
             return
 
-        print(f"Результат: {result}")
+        print("Пошаговое решение:")
+        for step in solution["steps"]:
+            print(step)
         return
 
     if action == 4:
@@ -207,20 +215,45 @@ def run_console_custom() -> None:
 
     variables = []
     for index in range(1, count + 1):
-        name = input(f"Шаг 2. Величина {index}: ").strip()
+        name = input(f"Шаг 2. Обозначение величины {index}: ").strip()
         unit = input(f"Шаг 2. Обозначение единицы для величины {index}: ").strip()
         if not name or not unit:
-            print("Величина и обозначение единицы обязательны")
+            print("Обозначение величины и обозначение единицы обязательны")
             return
-        variables.append({"name": name, "unit_symbol": unit})
+        variables.append(
+            {
+                "name": name,
+                "unit_symbol": unit,
+            }
+        )
 
     formula = input("Шаг 3. Введите формулу: ").strip()
     if not formula:
         print("Формула не может быть пустой")
         return
 
-    add_custom_formula(title=title, variables=variables, formula=formula)
+    result = None
+    if "=" not in formula:
+        result_name = input("Шаг 4. Название искомой величины: ").strip()
+        result_unit = input("Шаг 4. Обозначение единицы искомой величины: ").strip()
+
+        if not result_name:
+            print("Название искомой величины обязательно")
+            return
+
+        result = {
+            "display_name": result_name,
+            "unit_symbol": result_unit,
+        }
+
+    add_custom_formula(title=title, variables=variables, formula=formula, result=result)
     print("Формула сохранена")
+
+
+def run_console_chemistry() -> None:
+    from core.chemistry.periodic_table import run_console_chemistry as chemistry_console
+
+    chemistry_console()
 
 
 choice = int(
@@ -245,7 +278,8 @@ match choice:
                 "Выберите категорию "
                 "(Физика - 1 ;"
                 " Математика - 2 ;"
-                " Свои формулы - 3 ;)"
+                " Свои формулы - 3 ;"
+                " Химия - 4 ;)"
             )
         )
 
@@ -256,5 +290,7 @@ match choice:
                 run_console_math()
             case 3:
                 run_console_custom()
+            case 4:
+                run_console_chemistry()
             case _:
                 print("Неизвестная категория")
