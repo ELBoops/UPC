@@ -23,7 +23,7 @@ FORMULAS = {
                     ("n2", "Показатель преломления второй среды")
                 ],
                 "output": "Относительный показатель преломления",
-                "function": "core.physics.optics.calculations.calc_n21_from_n2_n1"
+                "function": "core.physic.optics.calculations.calc_n21_from_n2_n1"
             },
             2: {
                 "name": "Найти показатель преломления второй среды",
@@ -32,7 +32,7 @@ FORMULAS = {
                     ("n1", "Показатель преломления первой среды")
                 ],
                 "output": "Показатель преломления второй среды",
-                "function": "core.physics.optics.calculations.calc_n2_from_n21_n1"
+                "function": "core.physic.optics.calculations.calc_n2_from_n21_n1"
             },
             3: {
                 "name": "Найти показатель преломления первой среды",
@@ -41,7 +41,7 @@ FORMULAS = {
                     ("n21", "Относительный показатель преломления")
                 ],
                 "output": "Показатель преломления первой среды",
-                "function": "core.physics.optics.calculations.calc_n1_from_n2_n21"
+                "function": "core.physic.optics.calculations.calc_n1_from_n2_n21"
             }
         }
     },
@@ -58,7 +58,7 @@ FORMULAS = {
                     ("sin_gamma", "Синус угла преломления")
                 ],
                 "output": "Относительный показатель преломления",
-                "function": "core.physics.optics.calculations.calc_n21_from_sin_alpha_sin_gamma"
+                "function": "core.physic.optics.calculations.calc_n21_from_sin_alpha_sin_gamma"
             },
             2: {
                 "name": "Найти синус угла падения",
@@ -67,7 +67,7 @@ FORMULAS = {
                     ("sin_gamma", "Синус угла преломления")
                 ],
                 "output": "Синус угла падения",
-                "function": "core.physics.optics.calculations.calc_sin_alpha_from_n21_sin_gamma"
+                "function": "core.physic.optics.calculations.calc_sin_alpha_from_n21_sin_gamma"
             },
             3: {
                 "name": "Найти синус угла преломления",
@@ -76,7 +76,7 @@ FORMULAS = {
                     ("n21", "Относительный показатель преломления")
                 ],
                 "output": "Синус угла преломления",
-                "function": "core.physics.optics.calculations.calc_sin_gamma_from_sin_alpha_n21"
+                "function": "core.physic.optics.calculations.calc_sin_gamma_from_sin_alpha_n21"
             }
         }     
     },
@@ -93,7 +93,7 @@ FORMULAS = {
                     ("f", "Изображение")
                 ],
                 "output": "Фокусное расстояние",
-                "function": "core.physics.optics.calculations.calc_F_from_d_f"
+                "function": "core.physic.optics.calculations.calc_F_from_d_f"
             },
             2: {
                 "name": "Найти предметное расстояние",
@@ -102,7 +102,7 @@ FORMULAS = {
                     ("f", "Изображение")
                 ],
                 "output": "Предметное расстояние",
-                "function": "core.physics.optics.calculations.calc_d_from_F_f"
+                "function": "core.physic.optics.calculations.calc_d_from_F_f"
             },
             3: {
                 "name": "Найти изображение",
@@ -111,7 +111,7 @@ FORMULAS = {
                     ("d", "Предметное расстояние")
                 ],
                 "output": "Изображение",
-                "function": "core.physics.optics.calculations.calc_f_from_F_d"
+                "function": "core.physic.optics.calculations.calc_f_from_F_d"
             }
         }
     },
@@ -127,7 +127,7 @@ FORMULAS = {
                       ("F", "Фокусное расстояние")
                   ],
                   "output": "Оптическая сила",
-                  "function": "core.physics.optics.calculations.calc_D_from_F"
+                  "function": "core.physic.optics.calculations.calc_D_from_F"
               },
               2: {
                   "name": "Найти фокусное расстояние",
@@ -135,7 +135,7 @@ FORMULAS = {
                       ("D", "Оптическая сила")
                   ],
                   "output": "Фокусное расстояние",
-                  "function": "core.physics.optics.calculations.calc_F_from_D"
+                  "function": "core.physic.optics.calculations.calc_F_from_D"
               }
           }
      },
@@ -152,7 +152,7 @@ FORMULAS = {
                       ("lam", "Длина волны")
                   ],
                   "output": "Δd для макс. интерференции",
-                  "function": "core.physics.optics.calculations.calc_delta_from_k_lambda"
+                  "function": "core.physic.optics.calculations.calc_delta_from_k_lambda"
               },
               2: {
                   "name": "Найти Δd для мин. интерференции",
@@ -161,7 +161,7 @@ FORMULAS = {
                       ("lam", "Длина волны")
                   ],
                   "output": "Δd для мин. интерференции",
-                  "function": "core.physics.optics.calculations.calc_delta_min_from_k_lambda"
+                  "function": "core.physic.optics.calculations.calc_delta_min_from_k_lambda"
               },
               3: {
                   "name": "Найти k по Δd и λ",
@@ -170,7 +170,7 @@ FORMULAS = {
                       ("lam", "Длина волны")
                   ],
                   "output": "Порядок k",
-                  "function": "core.physics.optics.calculations.calc_k_from_delta_lambda"
+                  "function": "core.physic.optics.calculations.calc_k_from_delta_lambda"
               },
               4: {
                   "name": "Найти k по Δd (мин. или макс.) и λ",
@@ -179,7 +179,7 @@ FORMULAS = {
                       ("lam", "Длина волны")
                   ],
                   "output": "Порядок k (для мин. формулы)",
-                  "function": "core.physics.optics.calculations.calc_k_from_delta_min_lambda"
+                  "function": "core.physic.optics.calculations.calc_k_from_delta_min_lambda"
               },
               5: {
                   "name": "Найти λ по Δd и k",
@@ -188,7 +188,7 @@ FORMULAS = {
                       ("k", "Порядок")
                   ],
                   "output": "Длина волны λ (для макс. формулы)",
-                  "function": "core.physics.optics.calculations.calc_lambda_from_delta_k"
+                  "function": "core.physic.optics.calculations.calc_lambda_from_delta_k"
               }
           }
      },
@@ -206,7 +206,7 @@ FORMULAS = {
                       ("phi", "Угол дифракции")
                   ],
                   "output": "Шаг решетки d",
-                  "function": "core.physics.optics.calculations.calc_d_from_k_lambda_phi"
+                  "function": "core.physic.optics.calculations.calc_d_from_k_lambda_phi"
               },
               2: {
                   "name": "Найти угол дифракции",
@@ -216,7 +216,7 @@ FORMULAS = {
                       ("d", "Шаг решетки")
                   ],
                   "output": "Угол дифракции φ",
-                  "function": "core.physics.optics.calculations.calc_phi_from_k_lambda_d"
+                  "function": "core.physic.optics.calculations.calc_phi_from_k_lambda_d"
               },
               3: {
                   "name": "Найти порядок k",
@@ -226,7 +226,7 @@ FORMULAS = {
                       ("phi", "Угол дифракции")
                   ],
                   "output": "Порядок k",
-                  "function": "core.physics.optics.calculations.calc_k_from_d_lambda_phi"
+                  "function": "core.physic.optics.calculations.calc_k_from_d_lambda_phi"
               },
               4: {
                   "name": "Найти длину волны λ",
@@ -236,7 +236,7 @@ FORMULAS = {
                       ("k", "Порядок")
                   ],
                   "output": "Длина волны λ",
-                  "function": "core.physics.optics.calculations.calc_lambda_from_d_phi_k"
+                  "function": "core.physic.optics.calculations.calc_lambda_from_d_phi_k"
               }
           }
      }
